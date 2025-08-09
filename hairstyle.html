@@ -204,30 +204,129 @@
         }
 
         .paw-back-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;            /* circle size */
-    height: 50px;
-    background-color: #FADADD; /* pastel pink */
-    color: #5C4033;         /* paw color */
-    font-size: 22px;        /* emoji size */
-    text-decoration: none;
-    border-radius: 50%;     /* make it round */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: fixed;        /* stays visible */
-    top: 20px;
-    left: 20px;             /* position in top-left corner */
-    z-index: 1000;
-}
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #FADADD;
+            color: #5C4033;
+            font-size: 22px;
+            text-decoration: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
 
-.paw-back-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-    background-color: #FFD1DC; /* slightly darker pink */
-}
+        .paw-back-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+            background-color: #FFD1DC;
+        }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(89, 43, 2, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { 
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(191, 107, 4, 0.3);
+            border: 2px solid #F2AF88;
+            animation: zoomIn 0.3s ease;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #BF6B04;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(242, 175, 136, 0.2);
+        }
+
+        .modal-close:hover {
+            background: rgba(191, 107, 4, 0.2);
+            transform: scale(1.1);
+        }
+
+        .modal-image {
+            width: 350px;
+            height: 350px;
+            background: rgba(217, 145, 82, 0.3);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12rem;
+            margin: 0 auto 25px;
+            border: 3px solid rgba(191, 107, 4, 0.3);
+        }
+
+        .modal-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #BF6B04;
+            margin-bottom: 15px;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #D99152;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -245,6 +344,17 @@
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 20px;
             }
+
+            .modal-content {
+                padding: 25px;
+                margin: 20px;
+            }
+
+            .modal-image {
+                width: 280px;
+                height: 280px;
+                font-size: 9rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -256,9 +366,10 @@
 </head>
 <body>
      <!-- Paw Back Button -->
-                <a href="javascript:history.back()" class="paw-back-btn" title="Go Back">
-                    🐾
-                </a>
+    <a href="javascript:history.back()" class="paw-back-btn" title="Go Back">
+        🐾
+    </a>
+
     <div class="floating-paws">
         <div class="paw" style="left: 10%; animation-delay: 0s;">🐾</div>
         <div class="paw" style="left: 20%; animation-delay: 2s;">🐾</div>
@@ -274,15 +385,12 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-           
-
             <h1>
                 <span class="cat-emoji">💇‍♀️</span>
                 My Fabulous Fur Styles
                 <span class="cat-emoji">✂️</span>
             </h1>
             <p>*preens whiskers* Time to choose my most paw-some look! *meow*</p>
-            
         </div>
 
         <!-- Hairstyles Section -->
@@ -291,73 +399,73 @@
             <p class="section-subtitle">Every whisker perfectly groomed, every fur strand in place!</p>
             
             <div class="hairstyles-grid">
-                <div class="hairstyle-card" onclick="selectHairstyle('Classic Fluff')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Classic Fluff')">
                     <div class="hairstyle-image">🐱</div>
                     <div class="hairstyle-name">The Classic Fluff</div>
                     <div class="hairstyle-description">*purrs* Timeless and sophisticated</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Majestic Mane')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Majestic Mane')">
                     <div class="hairstyle-image">🦁</div>
                     <div class="hairstyle-name">Majestic Mane</div>
                     <div class="hairstyle-description">*roars softly* For the regal feline</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Sleek Whiskers')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Sleek Whiskers')">
                     <div class="hairstyle-image">😸</div>
                     <div class="hairstyle-name">Sleek Whiskers</div>
                     <div class="hairstyle-description">*meows elegantly* Modern and chic</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Fluffy Cloud')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Fluffy Cloud')">
                     <div class="hairstyle-image">☁️</div>
                     <div class="hairstyle-name">The Fluffy Cloud</div>
                     <div class="hairstyle-description">*floats gracefully* Soft as a whisper</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Wild Whiskers')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Wild Whiskers')">
                     <div class="hairstyle-image">🐾</div>
                     <div class="hairstyle-name">Wild Whiskers</div>
                     <div class="hairstyle-description">*pounces playfully* Untamed and free</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Bow-tiful')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Bow-tiful')">
                     <div class="hairstyle-image">🎀</div>
                     <div class="hairstyle-name">Bow-tiful Princess</div>
                     <div class="hairstyle-description">*twirls* Perfect for special occasions</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Punk Rock')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Punk Rock')">
                     <div class="hairstyle-image">🤘</div>
                     <div class="hairstyle-name">Punk Rock Kitty</div>
                     <div class="hairstyle-description">*hisses coolly* Rebellious and edgy</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Gentleman Cat')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Gentleman Cat')">
                     <div class="hairstyle-image">🎩</div>
                     <div class="hairstyle-name">Dapper Gentleman</div>
                     <div class="hairstyle-description">*tips hat* Distinguished and proper</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Beach Waves')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Beach Waves')">
                     <div class="hairstyle-image">🌊</div>
                     <div class="hairstyle-name">Beach Wave Fur</div>
                     <div class="hairstyle-description">*swishes tail* Relaxed summer vibes</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Space Buns')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Space Buns')">
                     <div class="hairstyle-image">🌟</div>
                     <div class="hairstyle-name">Cosmic Space Buns</div>
                     <div class="hairstyle-description">*meows at stars* Out of this world!</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Vintage Curls')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Vintage Curls')">
                     <div class="hairstyle-image">🌸</div>
                     <div class="hairstyle-name">Vintage Curls</div>
                     <div class="hairstyle-description">*purrs nostalgically* Classic elegance</div>
                 </div>
 
-                <div class="hairstyle-card" onclick="selectHairstyle('Messy Chic')">
+                <div class="hairstyle-card" onclick="openHairstyleModal('Messy Chic')">
                     <div class="hairstyle-image">😹</div>
                     <div class="hairstyle-name">Messy Chic</div>
                     <div class="hairstyle-description">*stretches lazily* Effortlessly stylish</div>
@@ -366,10 +474,105 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div id="hairstyleModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-image" id="modalImage"></div>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-subtitle" id="modalSubtitle"></p>
+        </div>
+    </div>
+
     <script>
-        function selectHairstyle(styleName) {
-            alert(`*purrs happily* You chose "${styleName}"! Looking absolutely paw-some! *preens*`);
+        const hairstyleData = {
+            'Classic Fluff': {
+                emoji: '🐱',
+                subtitle: '*purrs contentedly* The timeless choice of sophisticated felines'
+            },
+            'Majestic Mane': {
+                emoji: '🦁',
+                subtitle: '*roars majestically* For the regal ruler of the household'
+            },
+            'Sleek Whiskers': {
+                emoji: '😸',
+                subtitle: '*struts confidently* Modern sophistication meets feline grace'
+            },
+            'Fluffy Cloud': {
+                emoji: '☁️',
+                subtitle: '*floats dreamily* Soft as a summer breeze, fluffy as your dreams'
+            },
+            'Wild Whiskers': {
+                emoji: '🐾',
+                subtitle: '*pounces energetically* Embrace your wild side with untamed beauty'
+            },
+            'Bow-tiful': {
+                emoji: '🎀',
+                subtitle: '*twirls gracefully* Princess-perfect for special occasions'
+            },
+            'Punk Rock': {
+                emoji: '🤘',
+                subtitle: '*hisses rebelliously* Rock your inner rebel with edgy style'
+            },
+            'Gentleman Cat': {
+                emoji: '🎩',
+                subtitle: '*tips hat politely* Distinguished elegance for the refined feline'
+            },
+            'Beach Waves': {
+                emoji: '🌊',
+                subtitle: '*sways gently* Laid-back vibes with natural texture'
+            },
+            'Space Buns': {
+                emoji: '🌟',
+                subtitle: '*meows at the cosmos* Galactic glamour from another planet'
+            },
+            'Vintage Curls': {
+                emoji: '🌸',
+                subtitle: '*purrs nostalgically* Classic beauty with timeless appeal'
+            },
+            'Messy Chic': {
+                emoji: '😹',
+                subtitle: '*yawns stylishly* Effortless beauty with just-woke-up charm'
+            }
+        };
+
+        function openHairstyleModal(styleName) {
+            const modal = document.getElementById('hairstyleModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubtitle = document.getElementById('modalSubtitle');
+            
+            const styleData = hairstyleData[styleName];
+            
+            if (styleData) {
+                modalImage.textContent = styleData.emoji;
+                modalTitle.textContent = styleName;
+                modalSubtitle.textContent = styleData.subtitle;
+                
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
         }
+
+        function closeModal() {
+            const modal = document.getElementById('hairstyleModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('hairstyleModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         function goBack() {
             alert('*meows* Heading back to my FurFolio homepage... *swishes tail stylishly*');

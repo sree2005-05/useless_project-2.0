@@ -228,6 +228,106 @@
             background-color: #FFD1DC; 
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(89, 43, 2, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { 
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(191, 107, 4, 0.3);
+            border: 2px solid #F2AF88;
+            animation: zoomIn 0.3s ease;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #BF6B04;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(242, 175, 136, 0.2);
+        }
+
+        .modal-close:hover {
+            background: rgba(191, 107, 4, 0.2);
+            transform: scale(1.1);
+        }
+
+        .modal-image {
+            width: 350px;
+            height: 350px;
+            background: rgba(217, 145, 82, 0.3);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12rem;
+            margin: 0 auto 25px;
+            border: 3px solid rgba(191, 107, 4, 0.3);
+        }
+
+        .modal-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #BF6B04;
+            margin-bottom: 15px;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #D99152;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -243,6 +343,17 @@
             .outfits-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 20px;
+            }
+
+            .modal-content {
+                padding: 25px;
+                margin: 20px;
+            }
+
+            .modal-image {
+                width: 280px;
+                height: 280px;
+                font-size: 9rem;
             }
         }
 
@@ -288,73 +399,73 @@
             <p class="section-subtitle">Every thread chosen with purr-fection, every accessory paw-picked!</p>
             
             <div class="outfits-grid">
-                <div class="outfit-card" onclick="selectOutfit('Royal Velvet')">
+                <div class="outfit-card" onclick="openOutfitModal('Royal Velvet')">
                     <div class="outfit-image">👑</div>
                     <div class="outfit-name">Royal Velvet</div>
                     <div class="outfit-description">*purrs regally* Fit for feline royalty</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Business Cat')">
+                <div class="outfit-card" onclick="openOutfitModal('Business Cat')">
                     <div class="outfit-image">💼</div>
                     <div class="outfit-name">Business Cat</div>
                     <div class="outfit-description">*adjusts tie* Professional purr-formance</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Party Princess')">
+                <div class="outfit-card" onclick="openOutfitModal('Party Princess')">
                     <div class="outfit-image">🎉</div>
                     <div class="outfit-name">Party Princess</div>
                     <div class="outfit-description">*twirls sparkling* Ready to paw-ty!</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Cozy Sweater')">
+                <div class="outfit-card" onclick="openOutfitModal('Cozy Sweater')">
                     <div class="outfit-image">🧶</div>
                     <div class="outfit-name">Cozy Knit Sweater</div>
                     <div class="outfit-description">*purrs contentedly* Warm and snuggly</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Superhero Cape')">
+                <div class="outfit-card" onclick="openOutfitModal('Superhero Cape')">
                     <div class="outfit-image">🦸</div>
                     <div class="outfit-name">Super Cat Cape</div>
                     <div class="outfit-description">*swooshes dramatically* Hero of the day!</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Sailor Suit')">
+                <div class="outfit-card" onclick="openOutfitModal('Sailor Suit')">
                     <div class="outfit-image">⚓</div>
                     <div class="outfit-name">Nautical Navigator</div>
                     <div class="outfit-description">*salutes proudly* Ready to set sail!</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Chef Apron')">
+                <div class="outfit-card" onclick="openOutfitModal('Chef Apron')">
                     <div class="outfit-image">👨‍🍳</div>
                     <div class="outfit-name">Master Chef</div>
                     <div class="outfit-description">*meows confidently* Cooking up something special</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Disco Diva')">
+                <div class="outfit-card" onclick="openOutfitModal('Disco Diva')">
                     <div class="outfit-image">🕺</div>
                     <div class="outfit-name">Disco Diva</div>
                     <div class="outfit-description">*dances gracefully* Grooving in style</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Beach Vibes')">
+                <div class="outfit-card" onclick="openOutfitModal('Beach Vibes')">
                     <div class="outfit-image">🏖️</div>
                     <div class="outfit-name">Beach Bum</div>
                     <div class="outfit-description">*stretches in sunshine* Vacation ready</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Winter Wonderland')">
+                <div class="outfit-card" onclick="openOutfitModal('Winter Wonderland')">
                     <div class="outfit-image">❄️</div>
                     <div class="outfit-name">Winter Wonderland</div>
                     <div class="outfit-description">*shivers fashionably* Cozy and chic</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Garden Party')">
+                <div class="outfit-card" onclick="openOutfitModal('Garden Party')">
                     <div class="outfit-image">🌺</div>
                     <div class="outfit-name">Garden Party</div>
                     <div class="outfit-description">*sniffs flowers delicately* Blooming beautiful</div>
                 </div>
 
-                <div class="outfit-card" onclick="selectOutfit('Pajama Comfort')">
+                <div class="outfit-card" onclick="openOutfitModal('Pajama Comfort')">
                     <div class="outfit-image">😴</div>
                     <div class="outfit-name">Pajama Comfort</div>
                     <div class="outfit-description">*yawns adorably* Perfect for cat naps</div>
@@ -363,10 +474,105 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div id="outfitModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-image" id="modalImage"></div>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-subtitle" id="modalSubtitle"></p>
+        </div>
+    </div>
+
     <script>
-        function selectOutfit(outfitName) {
-            alert(`*purrs fashionably* You chose "${outfitName}"! Looking absolutely claw-some! *strikes a pose*`);
+        const outfitData = {
+            'Royal Velvet': {
+                emoji: '👑',
+                subtitle: '*purrs majestically* Luxurious velvet fit for the most regal of felines'
+            },
+            'Business Cat': {
+                emoji: '💼',
+                subtitle: '*adjusts tie professionally* Ready to take on the corporate world with style'
+            },
+            'Party Princess': {
+                emoji: '🎉',
+                subtitle: '*twirls in sparkling attire* The star of every celebration and gathering'
+            },
+            'Cozy Sweater': {
+                emoji: '🧶',
+                subtitle: '*snuggles contentedly* Perfect for those cozy afternoons by the window'
+            },
+            'Superhero Cape': {
+                emoji: '🦸',
+                subtitle: '*strikes heroic pose* Saving the day one purr at a time'
+            },
+            'Sailor Suit': {
+                emoji: '⚓',
+                subtitle: '*salutes with paw* Ready to navigate the seven seas of adventure'
+            },
+            'Chef Apron': {
+                emoji: '👨‍🍳',
+                subtitle: '*meows confidently* Creating culinary masterpieces in the kitchen'
+            },
+            'Disco Diva': {
+                emoji: '🕺',
+                subtitle: '*grooves to the beat* Dancing through life with feline flair'
+            },
+            'Beach Vibes': {
+                emoji: '🏖️',
+                subtitle: '*stretches in warm sunshine* Living the ultimate vacation lifestyle'
+            },
+            'Winter Wonderland': {
+                emoji: '❄️',
+                subtitle: '*stays warm and stylish* Embracing the winter season with cozy elegance'
+            },
+            'Garden Party': {
+                emoji: '🌺',
+                subtitle: '*sniffs delicate flowers* Blooming with natural beauty and grace'
+            },
+            'Pajama Comfort': {
+                emoji: '😴',
+                subtitle: '*yawns adorably* The perfect outfit for those all-day nap sessions'
+            }
+        };
+
+        function openOutfitModal(outfitName) {
+            const modal = document.getElementById('outfitModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubtitle = document.getElementById('modalSubtitle');
+            
+            const outfitInfo = outfitData[outfitName];
+            
+            if (outfitInfo) {
+                modalImage.textContent = outfitInfo.emoji;
+                modalTitle.textContent = outfitName;
+                modalSubtitle.textContent = outfitInfo.subtitle;
+                
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
         }
+
+        function closeModal() {
+            const modal = document.getElementById('outfitModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('outfitModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         function goBack() {
             alert('*meows* Heading back to my FurFolio homepage... *struts stylishly*');
