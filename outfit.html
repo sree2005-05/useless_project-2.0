@@ -160,14 +160,15 @@
             background: rgba(242, 175, 136, 0.2);
         }
 
-        .outfit-image {
+        .outfit-image img{
             width: 100%;
-            height: 200px;
+            height: 180px;
             background: rgba(217, 145, 82, 0.2);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
+            object-fit: contain;
             font-size: 4rem;
             margin-bottom: 15px;
             border: 2px solid rgba(191, 107, 4, 0.2);
@@ -310,6 +311,13 @@
             font-size: 12rem;
             margin: 0 auto 25px;
             border: 3px solid rgba(191, 107, 4, 0.3);
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .modal-title {
@@ -385,91 +393,48 @@
         <!-- Header -->
         <div class="header">
             <h1>
-                <span class="cat-emoji">👗</span>
                 My Purr-fect Wardrobe
-                <span class="cat-emoji">👔</span>
             </h1>
-            <p>*stretches gracefully* Time to show off my fabulous fashion sense! *meow*</p>
+            <p>Streeeechhhhh...Okayy hooman...Prepare to witness my cuteness! *meow*</p>
             
         </div>
 
         <!-- Outfits Section -->
         <div class="outfits-section">
-            <h2 class="section-title">Claws-ome Outfits *strikes a pose*</h2>
+            <h2 class="section-title">Claws-ome Outfits </h2>
             <p class="section-subtitle">Every thread chosen with purr-fection, every accessory paw-picked!</p>
             
             <div class="outfits-grid">
                 <div class="outfit-card" onclick="openOutfitModal('Royal Velvet')">
-                    <div class="outfit-image">👑</div>
+                    <div class="outfit-image"><img src="images/royal.png" alt="Royal Velvet"></div>
                     <div class="outfit-name">Royal Velvet</div>
-                    <div class="outfit-description">*purrs regally* Fit for feline royalty</div>
                 </div>
 
                 <div class="outfit-card" onclick="openOutfitModal('Business Cat')">
-                    <div class="outfit-image">💼</div>
+                    <div class="outfit-image"><img src="images/prof.png" alt="Business Cat"></div>
                     <div class="outfit-name">Business Cat</div>
-                    <div class="outfit-description">*adjusts tie* Professional purr-formance</div>
                 </div>
 
                 <div class="outfit-card" onclick="openOutfitModal('Party Princess')">
-                    <div class="outfit-image">🎉</div>
+                    <div class="outfit-image"><img src="images/princess.png" alt="Party Princess"></div>
                     <div class="outfit-name">Party Princess</div>
-                    <div class="outfit-description">*twirls sparkling* Ready to paw-ty!</div>
                 </div>
 
                 <div class="outfit-card" onclick="openOutfitModal('Cozy Sweater')">
-                    <div class="outfit-image">🧶</div>
+                    <div class="outfit-image"><img src="images/sweater.png" alt="Cozy Sweater"></div>
                     <div class="outfit-name">Cozy Knit Sweater</div>
-                    <div class="outfit-description">*purrs contentedly* Warm and snuggly</div>
                 </div>
 
-                <div class="outfit-card" onclick="openOutfitModal('Superhero Cape')">
-                    <div class="outfit-image">🦸</div>
-                    <div class="outfit-name">Super Cat Cape</div>
-                    <div class="outfit-description">*swooshes dramatically* Hero of the day!</div>
-                </div>
-
-                <div class="outfit-card" onclick="openOutfitModal('Sailor Suit')">
-                    <div class="outfit-image">⚓</div>
-                    <div class="outfit-name">Nautical Navigator</div>
-                    <div class="outfit-description">*salutes proudly* Ready to set sail!</div>
-                </div>
-
-                <div class="outfit-card" onclick="openOutfitModal('Chef Apron')">
-                    <div class="outfit-image">👨‍🍳</div>
+                <div class="outfit-card" onclick="openOutfitModal('MasterChef')">
+                    <div class="outfit-image"><img src="images/chef.png" alt="Master Chef"></div>
                     <div class="outfit-name">Master Chef</div>
-                    <div class="outfit-description">*meows confidently* Cooking up something special</div>
-                </div>
-
-                <div class="outfit-card" onclick="openOutfitModal('Disco Diva')">
-                    <div class="outfit-image">🕺</div>
-                    <div class="outfit-name">Disco Diva</div>
-                    <div class="outfit-description">*dances gracefully* Grooving in style</div>
                 </div>
 
                 <div class="outfit-card" onclick="openOutfitModal('Beach Vibes')">
-                    <div class="outfit-image">🏖️</div>
+                    <div class="outfit-image"><img src="images/beach.png" alt="Beach Vibes"></div>
                     <div class="outfit-name">Beach Bum</div>
-                    <div class="outfit-description">*stretches in sunshine* Vacation ready</div>
                 </div>
 
-                <div class="outfit-card" onclick="openOutfitModal('Winter Wonderland')">
-                    <div class="outfit-image">❄️</div>
-                    <div class="outfit-name">Winter Wonderland</div>
-                    <div class="outfit-description">*shivers fashionably* Cozy and chic</div>
-                </div>
-
-                <div class="outfit-card" onclick="openOutfitModal('Garden Party')">
-                    <div class="outfit-image">🌺</div>
-                    <div class="outfit-name">Garden Party</div>
-                    <div class="outfit-description">*sniffs flowers delicately* Blooming beautiful</div>
-                </div>
-
-                <div class="outfit-card" onclick="openOutfitModal('Pajama Comfort')">
-                    <div class="outfit-image">😴</div>
-                    <div class="outfit-name">Pajama Comfort</div>
-                    <div class="outfit-description">*yawns adorably* Perfect for cat naps</div>
-                </div>
             </div>
         </div>
     </div>
@@ -478,7 +443,7 @@
     <div id="outfitModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div class="modal-image" id="modalImage"></div>
+            <div class="modal-image" id="modalImage">🐱</div>
             <h2 class="modal-title" id="modalTitle"></h2>
             <p class="modal-subtitle" id="modalSubtitle"></p>
         </div>
@@ -487,53 +452,29 @@
     <script>
         const outfitData = {
             'Royal Velvet': {
-                emoji: '👑',
-                subtitle: '*purrs majestically* Luxurious velvet fit for the most regal of felines'
+                image: 'images/royal.png',
+                subtitle: "This royal robe is fitting, as I am the one who rules the house."
             },
             'Business Cat': {
-                emoji: '💼',
-                subtitle: '*adjusts tie professionally* Ready to take on the corporate world with style'
+                image: 'images/prof.png',
+                subtitle:  "I'm ready for my nine lives of work; where's the laser pointer spreadsheet?"
             },
             'Party Princess': {
-                emoji: '🎉',
-                subtitle: '*twirls in sparkling attire* The star of every celebration and gathering'
+                image: 'images/princess.png',
+                subtitle: "I am the princess of this kingdom, now bring me my royal tuna."
             },
             'Cozy Sweater': {
-                emoji: '🧶',
-                subtitle: '*snuggles contentedly* Perfect for those cozy afternoons by the window'
+                image: 'images/sweater.png',
+                subtitle: "This cozy sweater is nice, but it's really cramping my stretching style."
             },
-            'Superhero Cape': {
-                emoji: '🦸',
-                subtitle: '*strikes heroic pose* Saving the day one purr at a time'
-            },
-            'Sailor Suit': {
-                emoji: '⚓',
-                subtitle: '*salutes with paw* Ready to navigate the seven seas of adventure'
-            },
-            'Chef Apron': {
-                emoji: '👨‍🍳',
-                subtitle: '*meows confidently* Creating culinary masterpieces in the kitchen'
-            },
-            'Disco Diva': {
-                emoji: '🕺',
-                subtitle: '*grooves to the beat* Dancing through life with feline flair'
+            'MasterChef': {
+                image: 'images/chef.png',
+                subtitle: "I'm the head chef, but my specialty is still just knocking things off the counter."
             },
             'Beach Vibes': {
-                emoji: '🏖️',
-                subtitle: '*stretches in warm sunshine* Living the ultimate vacation lifestyle'
+                image: 'images/beach.png',
+                subtitle: "I'm just a cool cat, chillin' and lookin' for a sunbeam to nap in."
             },
-            'Winter Wonderland': {
-                emoji: '❄️',
-                subtitle: '*stays warm and stylish* Embracing the winter season with cozy elegance'
-            },
-            'Garden Party': {
-                emoji: '🌺',
-                subtitle: '*sniffs delicate flowers* Blooming with natural beauty and grace'
-            },
-            'Pajama Comfort': {
-                emoji: '😴',
-                subtitle: '*yawns adorably* The perfect outfit for those all-day nap sessions'
-            }
         };
 
         function openOutfitModal(outfitName) {
@@ -545,7 +486,7 @@
             const outfitInfo = outfitData[outfitName];
             
             if (outfitInfo) {
-                modalImage.textContent = outfitInfo.emoji;
+                modalImage.innerHTML = `<img src="${outfitInfo.image}" alt="${outfitName}">`;
                 modalTitle.textContent = outfitName;
                 modalSubtitle.textContent = outfitInfo.subtitle;
                 

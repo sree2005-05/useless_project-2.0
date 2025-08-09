@@ -160,11 +160,12 @@
             background: rgba(242, 175, 136, 0.2);
         }
 
-        .hairstyle-image {
+        .hairstyle-image img{
             width: 100%;
-            height: 200px;
+            height: 100%;
             background: rgba(217, 145, 82, 0.2);
             border-radius: 15px;
+            object-fit: contain;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -299,9 +300,9 @@
             transform: scale(1.1);
         }
 
-        .modal-image {
-            width: 350px;
-            height: 350px;
+        .modal-image img{
+            width: 750px;
+            height: 750px;
             background: rgba(217, 145, 82, 0.3);
             border-radius: 25px;
             display: flex;
@@ -386,90 +387,50 @@
         <!-- Header -->
         <div class="header">
             <h1>
-                <span class="cat-emoji">💇‍♀️</span>
-                My Fabulous Fur Styles
-                <span class="cat-emoji">✂️</span>
+                
+                Paw-Fect Hair
+                
             </h1>
-            <p>*preens whiskers* Time to choose my most paw-some look! *meow*</p>
+            <p>Time to choose my most paw-some look!</p>
         </div>
 
         <!-- Hairstyles Section -->
         <div class="hairstyles-section">
-            <h2 class="section-title">Purr-fect Hair Styles *flicks tail proudly*</h2>
+            <h2 class="section-title">Purr-fect Hair Styles </h2>
             <p class="section-subtitle">Every whisker perfectly groomed, every fur strand in place!</p>
             
             <div class="hairstyles-grid">
                 <div class="hairstyle-card" onclick="openHairstyleModal('Classic Fluff')">
-                    <div class="hairstyle-image">🐱</div>
+                    <div class="hairstyle-image"><img src="images/cowboy.jpg"></div>
                     <div class="hairstyle-name">The Classic Fluff</div>
-                    <div class="hairstyle-description">*purrs* Timeless and sophisticated</div>
                 </div>
 
                 <div class="hairstyle-card" onclick="openHairstyleModal('Majestic Mane')">
-                    <div class="hairstyle-image">🦁</div>
+                    <div class="hairstyle-image"><img src="images/majestic.png"></div>
                     <div class="hairstyle-name">Majestic Mane</div>
-                    <div class="hairstyle-description">*roars softly* For the regal feline</div>
-                </div>
-
-                <div class="hairstyle-card" onclick="openHairstyleModal('Sleek Whiskers')">
-                    <div class="hairstyle-image">😸</div>
-                    <div class="hairstyle-name">Sleek Whiskers</div>
-                    <div class="hairstyle-description">*meows elegantly* Modern and chic</div>
-                </div>
-
-                <div class="hairstyle-card" onclick="openHairstyleModal('Fluffy Cloud')">
-                    <div class="hairstyle-image">☁️</div>
-                    <div class="hairstyle-name">The Fluffy Cloud</div>
-                    <div class="hairstyle-description">*floats gracefully* Soft as a whisper</div>
                 </div>
 
                 <div class="hairstyle-card" onclick="openHairstyleModal('Wild Whiskers')">
-                    <div class="hairstyle-image">🐾</div>
+                    <div class="hairstyle-image"><img src="images/whirl.png"></div>
                     <div class="hairstyle-name">Wild Whiskers</div>
-                    <div class="hairstyle-description">*pounces playfully* Untamed and free</div>
-                </div>
-
-                <div class="hairstyle-card" onclick="openHairstyleModal('Bow-tiful')">
-                    <div class="hairstyle-image">🎀</div>
-                    <div class="hairstyle-name">Bow-tiful Princess</div>
-                    <div class="hairstyle-description">*twirls* Perfect for special occasions</div>
                 </div>
 
                 <div class="hairstyle-card" onclick="openHairstyleModal('Punk Rock')">
-                    <div class="hairstyle-image">🤘</div>
+                    <div class="hairstyle-image"><img src="images/punk.jpg"></div>
                     <div class="hairstyle-name">Punk Rock Kitty</div>
-                    <div class="hairstyle-description">*hisses coolly* Rebellious and edgy</div>
                 </div>
 
                 <div class="hairstyle-card" onclick="openHairstyleModal('Gentleman Cat')">
-                    <div class="hairstyle-image">🎩</div>
+                    <div class="hairstyle-image"><img src="images/formal.png"></div>
                     <div class="hairstyle-name">Dapper Gentleman</div>
-                    <div class="hairstyle-description">*tips hat* Distinguished and proper</div>
-                </div>
-
-                <div class="hairstyle-card" onclick="openHairstyleModal('Beach Waves')">
-                    <div class="hairstyle-image">🌊</div>
-                    <div class="hairstyle-name">Beach Wave Fur</div>
-                    <div class="hairstyle-description">*swishes tail* Relaxed summer vibes</div>
-                </div>
-
-                <div class="hairstyle-card" onclick="openHairstyleModal('Space Buns')">
-                    <div class="hairstyle-image">🌟</div>
-                    <div class="hairstyle-name">Cosmic Space Buns</div>
-                    <div class="hairstyle-description">*meows at stars* Out of this world!</div>
                 </div>
 
                 <div class="hairstyle-card" onclick="openHairstyleModal('Vintage Curls')">
-                    <div class="hairstyle-image">🌸</div>
+                    <div class="hairstyle-image"><img src="images/curls.png"></div>
                     <div class="hairstyle-name">Vintage Curls</div>
-                    <div class="hairstyle-description">*purrs nostalgically* Classic elegance</div>
+
                 </div>
 
-                <div class="hairstyle-card" onclick="openHairstyleModal('Messy Chic')">
-                    <div class="hairstyle-image">😹</div>
-                    <div class="hairstyle-name">Messy Chic</div>
-                    <div class="hairstyle-description">*stretches lazily* Effortlessly stylish</div>
-                </div>
             </div>
         </div>
     </div>
@@ -487,53 +448,29 @@
     <script>
         const hairstyleData = {
             'Classic Fluff': {
-                emoji: '🐱',
-                subtitle: '*purrs contentedly* The timeless choice of sophisticated felines'
+                image : 'images/cowboy.jpg',
+                subtitle: "Howdy, partner! This hat keeps the sun off my eyes while I chase dust bunnies and herd my humans."
             },
             'Majestic Mane': {
-                emoji: '🦁',
-                subtitle: '*roars majestically* For the regal ruler of the household'
-            },
-            'Sleek Whiskers': {
-                emoji: '😸',
-                subtitle: '*struts confidently* Modern sophistication meets feline grace'
-            },
-            'Fluffy Cloud': {
-                emoji: '☁️',
-                subtitle: '*floats dreamily* Soft as a summer breeze, fluffy as your dreams'
+                image : 'images/majestic.png',
+                subtitle: "Behold my glorious mane; it's a lion's look with a cat's nap schedule."
             },
             'Wild Whiskers': {
-                emoji: '🐾',
-                subtitle: '*pounces energetically* Embrace your wild side with untamed beauty'
-            },
-            'Bow-tiful': {
-                emoji: '🎀',
-                subtitle: '*twirls gracefully* Princess-perfect for special occasions'
+                image : 'images/whirl.png',
+                subtitle: "My whiskers are so wild, they can feel the vibrations of a treat bag from a mile away."
             },
             'Punk Rock': {
-                emoji: '🤘',
-                subtitle: '*hisses rebelliously* Rock your inner rebel with edgy style'
+                image : 'images/punk.jpg',
+                subtitle: "My mohawk is a warning to all who dare to touch my belly."
             },
             'Gentleman Cat': {
-                emoji: '🎩',
-                subtitle: '*tips hat politely* Distinguished elegance for the refined feline'
-            },
-            'Beach Waves': {
-                emoji: '🌊',
-                subtitle: '*sways gently* Laid-back vibes with natural texture'
-            },
-            'Space Buns': {
-                emoji: '🌟',
-                subtitle: '*meows at the cosmos* Galactic glamour from another planet'
+                image : 'images/formal.png',
+                subtitle: "I must say, this coiffure is purr-fectly suited for my sophisticated lifestyle."
             },
             'Vintage Curls': {
-                emoji: '🌸',
-                subtitle: '*purrs nostalgically* Classic beauty with timeless appeal'
+                image : 'images/curls.png',
+                subtitle:  "I'm told this look is very 'old Hollywood,' now where is my sardine canapés?"
             },
-            'Messy Chic': {
-                emoji: '😹',
-                subtitle: '*yawns stylishly* Effortless beauty with just-woke-up charm'
-            }
         };
 
         function openHairstyleModal(styleName) {
@@ -545,7 +482,7 @@
             const styleData = hairstyleData[styleName];
             
             if (styleData) {
-                modalImage.textContent = styleData.emoji;
+                modalImage.innerHTML = `<img src="${styleData.image}" alt="${styleName}" style="width:400px;height:auto;">`;
                 modalTitle.textContent = styleName;
                 modalSubtitle.textContent = styleData.subtitle;
                 

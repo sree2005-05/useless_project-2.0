@@ -67,7 +67,7 @@
         }
 
         /* Header */
-        .header {
+       .header {
             text-align: center;
             margin-bottom: 40px;
             background: rgba(255, 255, 255, 0.95);
@@ -290,9 +290,7 @@
         <!-- Header -->
         <div class="header">
             <h1>
-                <span class="cat-emoji">🐱</span>
                 FurFolio
-                <span class="cat-emoji">✨</span>
             </h1>
             <p>*stretches and yawns* Welcome to my paw-some digital life! *purrs*</p>
             
@@ -306,7 +304,6 @@
         <!-- Menu Section -->
         <div class="menu-section">
             <h2 class="section-title">My Paw-some Activities *flicks tail proudly*</h2>
-            <p class="section-subtitle">Choose your favorite feline adventure!</p>
             
             <div class="menu-grid">
                 <div class="menu-card" onclick="goToPage('outfit')">
@@ -324,13 +321,13 @@
                 <div class="menu-card" onclick="goToPage('diary')">
                     <div class="menu-icon">📖</div>
                     <div class="menu-title">My Diary</div>
-                    <div class="menu-description">*curls up* Purr-sonal thoughts</div>
+                    
                 </div>
 
                 <div class="menu-card" onclick="goToPage('todo')">
                     <div class="menu-icon">✅</div>
                     <div class="menu-title">To Do List</div>
-                    <div class="menu-description">*organizes* Paws-itive planning</div>
+                   
                 </div>
             </div>
         </div>
@@ -368,20 +365,20 @@
         function goToPage(page) {
             switch(page) {
                 case 'outfit':
-                    alert('*meows excitedly* Taking you to my fabulous outfit collection! *prances*');
-                    // window.location.href = 'outfit.html';
+                    //alert('*meows excitedly* Taking you to my fabulous outfit collection! *prances*');
+                     window.location.href = 'outfit.html';
                     break;
                 case 'hairstyle':
-                    alert('*preens whiskers* Off to my glamorous hairstyle gallery! *fluffs fur*');
-                    // window.location.href = 'hairstyle.html';
+                    //alert('*preens whiskers* Off to my glamorous hairstyle gallery! *fluffs fur*');
+                    window.location.href = 'hairstyle.html';
                     break;
                 case 'diary':
-                    alert('*curls up with diary* Opening my most purr-sonal thoughts! *gentle meow*');
-                    // window.location.href = 'diary.html';
+                    //alert('*curls up with diary* Opening my most purr-sonal thoughts! *gentle meow*');
+                     window.location.href = 'diary.html';
                     break;
                 case 'todo':
-                    alert('*organizes with tiny paws* Time to tackle my to-do list! *determined meow*');
-                    // window.location.href = 'todo.html';
+                    //alert('*organizes with tiny paws* Time to tackle my to-do list! *determined meow*');
+                     window.location.href = 'todo.html';
                     break;
             }
         }
