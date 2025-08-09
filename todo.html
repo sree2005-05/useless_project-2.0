@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FurFolio - Cat To-Do List</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F2F2F2;
+            min-height: 100vh;
+            color: #592B02;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating paw prints */
+        .floating-paws {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .paw {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            color: #BF6B04;
+            animation: float 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(191, 107, 4, 0.1);
+            border: 1px solid #F2AF88;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #BF6B04;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .cat-emoji {
+            font-size: 3rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #D99152;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #BF6B04;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(191, 107, 4, 0.3);
+        }
+
+        .back-btn:hover {
+            background-color: #592B02;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(191, 107, 4, 0.4);
+        }
+
+        /* Todo Section */
+        .todo-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(191, 107, 4, 0.1);
+            border: 1px solid #F2AF88;
+        }
+
+        .add-todo {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .todo-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: 2px solid #F2AF88;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: rgba(242, 242, 242, 0.5);
+            color: #592B02;
+        }
+
+        .todo-input:focus {
+            outline: none;
+            border-color: #D99152;
+            box-shadow: 0 0 0 3px rgba(217, 145, 82, 0.1);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .todo-input::placeholder {
+            color: #BF6B04;
+            opacity: 0.7;
+        }
+
+        .add-btn {
+            padding: 15px 30px;
+            background-color: #D99152;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(217, 145, 82, 0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .add-btn:hover {
+            background-color: #BF6B04;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 145, 82, 0.4);
+        }
+
+        /* Todo List */
+        .todo-list {
+            list-style: none;
+        }
+
+        .todo-item {
+            background: rgba(242, 175, 136, 0.1);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+
+        .todo-item:hover {
+            transform: translateX(5px);
+            border-color: rgba(191, 107, 4, 0.3);
+            box-shadow: 0 5px 20px rgba(191, 107, 4, 0.1);
+            background: rgba(242, 175, 136, 0.2);
+        }
+
+        .todo-item.completed {
+            opacity: 0.6;
+            background: rgba(217, 145, 82, 0.1);
+            border-color: rgba(217, 145, 82, 0.3);
+        }
+
+        .todo-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid #BF6B04;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .todo-checkbox.checked {
+            background: #D99152;
+            border-color: #D99152;
+        }
+
+        .todo-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .todo-text {
+            flex: 1;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+            color: #592B02;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+            color: #BF6B04;
+        }
+
+        .delete-btn {
+            background-color: #BF6B04;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delete-btn:hover {
+            background-color: #592B02;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(89, 43, 2, 0.3);
+        }
+
+        /* Predefined Tasks */
+        .predefined-tasks {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(191, 107, 4, 0.1);
+        }
+
+        .predefined-tasks h3 {
+            color: #BF6B04;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .task-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .suggestion-btn {
+            background: rgba(242, 175, 136, 0.2);
+            color: #592B02;
+            border: 2px solid rgba(191, 107, 4, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .suggestion-btn:hover {
+            background: rgba(242, 175, 136, 0.3);
+            border-color: #BF6B04;
+            transform: translateY(-2px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #D99152;
+        }
+
+        .empty-state .cat-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .add-todo {
+                flex-direction: column;
+            }
+            
+            .todo-input {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-paws">
+        <div class="paw" style="left: 10%; animation-delay: 0s;">🐾</div>
+        <div class="paw" style="left: 20%; animation-delay: 2s;">🐾</div>
+        <div class="paw" style="left: 30%; animation-delay: 4s;">🐾</div>
+        <div class="paw" style="left: 40%; animation-delay: 6s;">🐾</div>
+        <div class="paw" style="left: 50%; animation-delay: 8s;">🐾</div>
+        <div class="paw" style="left: 60%; animation-delay: 10s;">🐾</div>
+        <div class="paw" style="left: 70%; animation-delay: 12s;">🐾</div>
+        <div class="paw" style="left: 80%; animation-delay: 14s;">🐾</div>
+        <div class="paw" style="left: 90%; animation-delay: 16s;">🐾</div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <span class="cat-emoji">🐱</span>
+                My To-Do List
+            </h1>
+            <p>Keep track of all your important cat activities</p>
+            <a href="#" class="back-btn" onclick="goBack()">← Back to FurFolio</a>
+        </div>
+
+        <!-- Todo Section -->
+        <div class="todo-section">
+            <div class="add-todo">
+                <input type="text" class="todo-input" id="todoInput" placeholder="What needs to be done today?">
+                <button class="add-btn" onclick="addTodo()">Add Task</button>
+            </div>
+
+            <ul class="todo-list" id="todoList">
+                <!-- Todos will be added here dynamically -->
+            </ul>
+
+            <div id="emptyState" class="empty-state">
+                <div class="cat-icon">😴</div>
+                <p>No tasks yet! Add some activities above.</p>
+            </div>
+
+            <div class="predefined-tasks">
+                <h3>Quick Task Ideas</h3>
+                <div class="task-suggestions">
+                    <button class="suggestion-btn" onclick="addPredefinedTask('Take a 3-hour nap in the sunbeam')">Sunbeam Nap</button>
+                    <button class="suggestion-btn" onclick="addPredefinedTask('Knock something off the counter')">Counter Clearing</button>
+                    <button class="suggestion-btn" onclick="addPredefinedTask('Stare intensely at the red dot')">Red Dot Hunt</button>
+                    <button class="suggestion-btn" onclick="addPredefinedTask('Ignore human for exactly 2 hours')">Strategic Ignoring</button>
+                    <button class="suggestion-btn" onclick="addPredefinedTask('Practice dramatic flopping')">Drama Practice</button>
+                    <button class="suggestion-btn" onclick="addPredefinedTask('Inspect the food bowl multiple times')">Food Bowl Audit</button>
+                    <button class="suggestion-btn" onclick="addPredefinedTask('Judge humans silently')">Human Assessment</button>
+                    <button class="suggestion-btn" onclick="addPredefinedTask('Find the perfect cardboard box')">Box Hunt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let todos = [];
+        let nextId = 1;
+
+        function updateEmptyState() {
+            const emptyState = document.getElementById('emptyState');
+            
+            if (todos.length === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+
+        function renderTodos() {
+            const todoList = document.getElementById('todoList');
+            todoList.innerHTML = '';
+
+            todos.forEach(todo => {
+                const li = document.createElement('li');
+                li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+                
+                li.innerHTML = `
+                    <div class="todo-checkbox ${todo.completed ? 'checked' : ''}" onclick="toggleTodo(${todo.id})"></div>
+                    <span class="todo-text">${todo.text}</span>
+                    <button class="delete-btn" onclick="deleteTodo(${todo.id})">×</button>
+                `;
+                
+                todoList.appendChild(li);
+            });
+
+            updateEmptyState();
+        }
+
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+            
+            if (text === '') return;
+
+            const todo = {
+                id: nextId++,
+                text: text,
+                completed: false
+            };
+
+            todos.push(todo);
+            input.value = '';
+            renderTodos();
+        }
+
+        function addPredefinedTask(taskText) {
+            const todo = {
+                id: nextId++,
+                text: taskText,
+                completed: false
+            };
+
+            todos.push(todo);
+            renderTodos();
+        }
+
+        function toggleTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.completed = !todo.completed;
+                renderTodos();
+            }
+        }
+
+        function deleteTodo(id) {
+            todos = todos.filter(t => t.id !== id);
+            renderTodos();
+        }
+
+        function goBack() {
+            alert('Returning to FurFolio main page...');
+        }
+
+        // Allow adding todos with Enter key
+        document.getElementById('todoInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+
+        // Initialize with some sample todos
+        todos = [
+            { id: nextId++, text: "Morning nap (9 AM - 12 PM)", completed: false },
+            { id: nextId++, text: "Afternoon nap (1 PM - 4 PM)", completed: true },
+            { id: nextId++, text: "Evening treat demands", completed: false }
+        ];
+
+        renderTodos();
+    </script>
+</body>
+</html>

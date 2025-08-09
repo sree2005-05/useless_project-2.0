@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FurFolio - My Paw-some Life</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F2F2F2;
+            min-height: 100vh;
+            color: #592B02;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating paw prints */
+        .floating-paws {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .paw {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            color: #BF6B04;
+            animation: float 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(191, 107, 4, 0.1);
+            border: 1px solid #F2AF88;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #BF6B04;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .cat-emoji {
+            font-size: 3rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #D99152;
+            margin-bottom: 20px;
+        }
+
+        /* Motivational Text */
+        .motivation-container {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .motivation-text {
+            font-size: 1.1rem;
+            color: #BF6B04;
+            font-style: italic;
+            font-weight: 600;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInOut 4s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateY(10px); }
+            20%, 80% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Menu Grid */
+        .menu-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(191, 107, 4, 0.1);
+            border: 1px solid #F2AF88;
+            margin-bottom: 30px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            justify-items: center;
+            margin-top: 20px;
+        }
+
+        .menu-card {
+            background: rgba(242, 175, 136, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            width: 280px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(191, 107, 4, 0.3);
+            box-shadow: 0 10px 30px rgba(191, 107, 4, 0.15);
+            background: rgba(242, 175, 136, 0.2);
+        }
+
+        .menu-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .menu-card:hover .menu-icon {
+            animation: spin 0.6s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .menu-title {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #592B02;
+            margin-bottom: 8px;
+        }
+
+        .menu-description {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #BF6B04;
+            font-style: italic;
+        }
+
+        .section-title {
+            color: #BF6B04;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            color: #D99152;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .menu-card {
+                width: 250px;
+                height: 180px;
+                padding: 18px;
+            }
+
+            .menu-icon {
+                font-size: 3.5rem;
+            }
+
+            .menu-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-card {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-paws">
+        <div class="paw" style="left: 10%; animation-delay: 0s;">🐾</div>
+        <div class="paw" style="left: 20%; animation-delay: 2s;">🐾</div>
+        <div class="paw" style="left: 30%; animation-delay: 4s;">🐾</div>
+        <div class="paw" style="left: 40%; animation-delay: 6s;">🐾</div>
+        <div class="paw" style="left: 50%; animation-delay: 8s;">🐾</div>
+        <div class="paw" style="left: 60%; animation-delay: 10s;">🐾</div>
+        <div class="paw" style="left: 70%; animation-delay: 12s;">🐾</div>
+        <div class="paw" style="left: 80%; animation-delay: 14s;">🐾</div>
+        <div class="paw" style="left: 90%; animation-delay: 16s;">🐾</div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <span class="cat-emoji">🐱</span>
+                FurFolio
+                <span class="cat-emoji">✨</span>
+            </h1>
+            <p>*stretches and yawns* Welcome to my paw-some digital life! *purrs*</p>
+            
+            <div class="motivation-container">
+                <div class="motivation-text" id="motivationText">
+                    *purrs* Every day is a new adventure! *swishes tail happily*
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Section -->
+        <div class="menu-section">
+            <h2 class="section-title">My Paw-some Activities *flicks tail proudly*</h2>
+            <p class="section-subtitle">Choose your favorite feline adventure!</p>
+            
+            <div class="menu-grid">
+                <div class="menu-card" onclick="goToPage('outfits')">
+                    <div class="menu-icon">👗</div>
+                    <div class="menu-title">My Outfits</div>
+                    <div class="menu-description">*preens* Fabulous fashion choices</div>
+                </div>
+
+                <div class="menu-card" onclick="goToPage('hairstyles')">
+                    <div class="menu-icon">💇‍♀️</div>
+                    <div class="menu-title">Hair Styles</div>
+                    <div class="menu-description">*fluffs fur* Glamorous grooming</div>
+                </div>
+
+                <div class="menu-card" onclick="goToPage('diary')">
+                    <div class="menu-icon">📖</div>
+                    <div class="menu-title">My Diary</div>
+                    <div class="menu-description">*curls up* Purr-sonal thoughts</div>
+                </div>
+
+                <div class="menu-card" onclick="goToPage('todo')">
+                    <div class="menu-icon">✅</div>
+                    <div class="menu-title">To Do List</div>
+                    <div class="menu-description">*organizes* Paws-itive planning</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Motivational quotes that cycle
+        const motivationalQuotes = [
+            "*purrs* Every day is a new adventure! *swishes tail happily*",
+            "*stretches gracefully* You're absolutely paw-some today! *meows*",
+            "*blinks slowly* Believe in your inner feline magic! ✨",
+            "*kneads imaginary blanket* Life is better with a positive purr-spective!",
+            "*flicks ears confidently* You've got this, my fabulous human! *purrs*",
+            "*rolls around cutely* Embrace your unique whisker-worthy self!",
+            "*sits regally* Today is purr-fect for making memories! *meows softly*",
+            "*playful pounce* Chase your dreams like a feather toy! 🪶",
+            "*contented sigh* You bring so much joy to my world! *head bumps*",
+            "*proud tail flick* Your creativity makes my whiskers tingle! ✨"
+        ];
+
+        let currentQuoteIndex = 0;
+
+        // Function to cycle through motivational quotes
+        function cycleMotivation() {
+            const motivationElement = document.getElementById('motivationText');
+            motivationElement.textContent = motivationalQuotes[currentQuoteIndex];
+            currentQuoteIndex = (currentQuoteIndex + 1) % motivationalQuotes.length;
+        }
+
+        // Start motivation cycling
+        setInterval(cycleMotivation, 4000);
+        cycleMotivation(); // Show first quote immediately
+
+        // Navigation function
+        function goToPage(page) {
+            switch(page) {
+                case 'outfits':
+                    alert('*meows excitedly* Taking you to my fabulous outfit collection! *prances*');
+                    // window.location.href = 'outfits.html';
+                    break;
+                case 'hairstyles':
+                    alert('*preens whiskers* Off to my glamorous hairstyle gallery! *fluffs fur*');
+                    // window.location.href = 'hairstyles.html';
+                    break;
+                case 'diary':
+                    alert('*curls up with diary* Opening my most purr-sonal thoughts! *gentle meow*');
+                    // window.location.href = 'diary.html';
+                    break;
+                case 'todo':
+                    alert('*organizes with tiny paws* Time to tackle my to-do list! *determined meow*');
+                    // window.location.href = 'todo.html';
+                    break;
+            }
+        }
+
+        // Load stats from memory variables
+        function loadStats() {
+            // Stats functionality removed per user request
+        }
+
+        // Update stats functionality removed
+        function updateStats(type, count) {
+            // Stats functionality removed per user request
+        }
+
+        // Initialize (no stats to load)
+        // loadStats() removed
+    </script>
+</body>
+</html>

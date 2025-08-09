@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FurFolio - Cat Outfits</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F2F2F2;
+            min-height: 100vh;
+            color: #592B02;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating paw prints */
+        .floating-paws {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .paw {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            color: #BF6B04;
+            animation: float 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(191, 107, 4, 0.1);
+            border: 1px solid #F2AF88;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #BF6B04;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .cat-emoji {
+            font-size: 3rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #D99152;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #BF6B04;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(191, 107, 4, 0.3);
+        }
+
+        .back-btn:hover {
+            background-color: #592B02;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(191, 107, 4, 0.4);
+        }
+
+        /* Outfits Section */
+        .outfits-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(191, 107, 4, 0.1);
+            border: 1px solid #F2AF88;
+        }
+
+        .outfits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .outfit-card {
+            background: rgba(242, 175, 136, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .outfit-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(191, 107, 4, 0.3);
+            box-shadow: 0 10px 30px rgba(191, 107, 4, 0.15);
+            background: rgba(242, 175, 136, 0.2);
+        }
+
+        .outfit-image {
+            width: 100%;
+            height: 200px;
+            background: rgba(217, 145, 82, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            border: 2px solid rgba(191, 107, 4, 0.2);
+        }
+
+        .outfit-name {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #592B02;
+            margin-bottom: 8px;
+        }
+
+        .outfit-description {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #BF6B04;
+            font-style: italic;
+        }
+
+        .section-title {
+            color: #BF6B04;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            color: #D99152;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .paw-back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;            
+            height: 50px;
+            background-color: #FADADD; 
+            color: #5C4033;         
+            font-size: 22px;        
+            text-decoration: none;
+            border-radius: 50%;     
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: fixed;        
+            top: 20px;
+            left: 20px;             
+            z-index: 1000;
+        }
+
+        .paw-back-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+            background-color: #FFD1DC; 
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .outfits-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .outfits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Paw Back Button -->
+                <a href="javascript:history.back()" class="paw-back-btn" title="Go Back">
+                    🐾
+                </a>
+    <div class="floating-paws">
+        <div class="paw" style="left: 10%; animation-delay: 0s;">🐾</div>
+        <div class="paw" style="left: 20%; animation-delay: 2s;">🐾</div>
+        <div class="paw" style="left: 30%; animation-delay: 4s;">🐾</div>
+        <div class="paw" style="left: 40%; animation-delay: 6s;">🐾</div>
+        <div class="paw" style="left: 50%; animation-delay: 8s;">🐾</div>
+        <div class="paw" style="left: 60%; animation-delay: 10s;">🐾</div>
+        <div class="paw" style="left: 70%; animation-delay: 12s;">🐾</div>
+        <div class="paw" style="left: 80%; animation-delay: 14s;">🐾</div>
+        <div class="paw" style="left: 90%; animation-delay: 16s;">🐾</div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <span class="cat-emoji">👗</span>
+                My Purr-fect Wardrobe
+                <span class="cat-emoji">👔</span>
+            </h1>
+            <p>*stretches gracefully* Time to show off my fabulous fashion sense! *meow*</p>
+            
+        </div>
+
+        <!-- Outfits Section -->
+        <div class="outfits-section">
+            <h2 class="section-title">Claws-ome Outfits *strikes a pose*</h2>
+            <p class="section-subtitle">Every thread chosen with purr-fection, every accessory paw-picked!</p>
+            
+            <div class="outfits-grid">
+                <div class="outfit-card" onclick="selectOutfit('Royal Velvet')">
+                    <div class="outfit-image">👑</div>
+                    <div class="outfit-name">Royal Velvet</div>
+                    <div class="outfit-description">*purrs regally* Fit for feline royalty</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Business Cat')">
+                    <div class="outfit-image">💼</div>
+                    <div class="outfit-name">Business Cat</div>
+                    <div class="outfit-description">*adjusts tie* Professional purr-formance</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Party Princess')">
+                    <div class="outfit-image">🎉</div>
+                    <div class="outfit-name">Party Princess</div>
+                    <div class="outfit-description">*twirls sparkling* Ready to paw-ty!</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Cozy Sweater')">
+                    <div class="outfit-image">🧶</div>
+                    <div class="outfit-name">Cozy Knit Sweater</div>
+                    <div class="outfit-description">*purrs contentedly* Warm and snuggly</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Superhero Cape')">
+                    <div class="outfit-image">🦸</div>
+                    <div class="outfit-name">Super Cat Cape</div>
+                    <div class="outfit-description">*swooshes dramatically* Hero of the day!</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Sailor Suit')">
+                    <div class="outfit-image">⚓</div>
+                    <div class="outfit-name">Nautical Navigator</div>
+                    <div class="outfit-description">*salutes proudly* Ready to set sail!</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Chef Apron')">
+                    <div class="outfit-image">👨‍🍳</div>
+                    <div class="outfit-name">Master Chef</div>
+                    <div class="outfit-description">*meows confidently* Cooking up something special</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Disco Diva')">
+                    <div class="outfit-image">🕺</div>
+                    <div class="outfit-name">Disco Diva</div>
+                    <div class="outfit-description">*dances gracefully* Grooving in style</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Beach Vibes')">
+                    <div class="outfit-image">🏖️</div>
+                    <div class="outfit-name">Beach Bum</div>
+                    <div class="outfit-description">*stretches in sunshine* Vacation ready</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Winter Wonderland')">
+                    <div class="outfit-image">❄️</div>
+                    <div class="outfit-name">Winter Wonderland</div>
+                    <div class="outfit-description">*shivers fashionably* Cozy and chic</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Garden Party')">
+                    <div class="outfit-image">🌺</div>
+                    <div class="outfit-name">Garden Party</div>
+                    <div class="outfit-description">*sniffs flowers delicately* Blooming beautiful</div>
+                </div>
+
+                <div class="outfit-card" onclick="selectOutfit('Pajama Comfort')">
+                    <div class="outfit-image">😴</div>
+                    <div class="outfit-name">Pajama Comfort</div>
+                    <div class="outfit-description">*yawns adorably* Perfect for cat naps</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectOutfit(outfitName) {
+            alert(`*purrs fashionably* You chose "${outfitName}"! Looking absolutely claw-some! *strikes a pose*`);
+        }
+
+        function goBack() {
+            alert('*meows* Heading back to my FurFolio homepage... *struts stylishly*');
+        }
+    </script>
+</body>
+</html>

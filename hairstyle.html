@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FurFolio - Cat Hairstyles</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F2F2F2;
+            min-height: 100vh;
+            color: #592B02;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating paw prints */
+        .floating-paws {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .paw {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            color: #BF6B04;
+            animation: float 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(191, 107, 4, 0.1);
+            border: 1px solid #F2AF88;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #BF6B04;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .cat-emoji {
+            font-size: 3rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #D99152;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #BF6B04;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(191, 107, 4, 0.3);
+        }
+
+        .back-btn:hover {
+            background-color: #592B02;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(191, 107, 4, 0.4);
+        }
+
+        /* Hairstyles Section */
+        .hairstyles-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(191, 107, 4, 0.1);
+            border: 1px solid #F2AF88;
+        }
+
+        .hairstyles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .hairstyle-card {
+            background: rgba(242, 175, 136, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .hairstyle-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(191, 107, 4, 0.3);
+            box-shadow: 0 10px 30px rgba(191, 107, 4, 0.15);
+            background: rgba(242, 175, 136, 0.2);
+        }
+
+        .hairstyle-image {
+            width: 100%;
+            height: 200px;
+            background: rgba(217, 145, 82, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            border: 2px solid rgba(191, 107, 4, 0.2);
+        }
+
+        .hairstyle-name {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #592B02;
+            margin-bottom: 8px;
+        }
+
+        .hairstyle-description {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #BF6B04;
+            font-style: italic;
+        }
+
+        .section-title {
+            color: #BF6B04;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            color: #D99152;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .paw-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;            /* circle size */
+    height: 50px;
+    background-color: #FADADD; /* pastel pink */
+    color: #5C4033;         /* paw color */
+    font-size: 22px;        /* emoji size */
+    text-decoration: none;
+    border-radius: 50%;     /* make it round */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: fixed;        /* stays visible */
+    top: 20px;
+    left: 20px;             /* position in top-left corner */
+    z-index: 1000;
+}
+
+.paw-back-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    background-color: #FFD1DC; /* slightly darker pink */
+}
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .hairstyles-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hairstyles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Paw Back Button -->
+                <a href="javascript:history.back()" class="paw-back-btn" title="Go Back">
+                    🐾
+                </a>
+    <div class="floating-paws">
+        <div class="paw" style="left: 10%; animation-delay: 0s;">🐾</div>
+        <div class="paw" style="left: 20%; animation-delay: 2s;">🐾</div>
+        <div class="paw" style="left: 30%; animation-delay: 4s;">🐾</div>
+        <div class="paw" style="left: 40%; animation-delay: 6s;">🐾</div>
+        <div class="paw" style="left: 50%; animation-delay: 8s;">🐾</div>
+        <div class="paw" style="left: 60%; animation-delay: 10s;">🐾</div>
+        <div class="paw" style="left: 70%; animation-delay: 12s;">🐾</div>
+        <div class="paw" style="left: 80%; animation-delay: 14s;">🐾</div>
+        <div class="paw" style="left: 90%; animation-delay: 16s;">🐾</div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+           
+
+            <h1>
+                <span class="cat-emoji">💇‍♀️</span>
+                My Fabulous Fur Styles
+                <span class="cat-emoji">✂️</span>
+            </h1>
+            <p>*preens whiskers* Time to choose my most paw-some look! *meow*</p>
+            
+        </div>
+
+        <!-- Hairstyles Section -->
+        <div class="hairstyles-section">
+            <h2 class="section-title">Purr-fect Hair Styles *flicks tail proudly*</h2>
+            <p class="section-subtitle">Every whisker perfectly groomed, every fur strand in place!</p>
+            
+            <div class="hairstyles-grid">
+                <div class="hairstyle-card" onclick="selectHairstyle('Classic Fluff')">
+                    <div class="hairstyle-image">🐱</div>
+                    <div class="hairstyle-name">The Classic Fluff</div>
+                    <div class="hairstyle-description">*purrs* Timeless and sophisticated</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Majestic Mane')">
+                    <div class="hairstyle-image">🦁</div>
+                    <div class="hairstyle-name">Majestic Mane</div>
+                    <div class="hairstyle-description">*roars softly* For the regal feline</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Sleek Whiskers')">
+                    <div class="hairstyle-image">😸</div>
+                    <div class="hairstyle-name">Sleek Whiskers</div>
+                    <div class="hairstyle-description">*meows elegantly* Modern and chic</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Fluffy Cloud')">
+                    <div class="hairstyle-image">☁️</div>
+                    <div class="hairstyle-name">The Fluffy Cloud</div>
+                    <div class="hairstyle-description">*floats gracefully* Soft as a whisper</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Wild Whiskers')">
+                    <div class="hairstyle-image">🐾</div>
+                    <div class="hairstyle-name">Wild Whiskers</div>
+                    <div class="hairstyle-description">*pounces playfully* Untamed and free</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Bow-tiful')">
+                    <div class="hairstyle-image">🎀</div>
+                    <div class="hairstyle-name">Bow-tiful Princess</div>
+                    <div class="hairstyle-description">*twirls* Perfect for special occasions</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Punk Rock')">
+                    <div class="hairstyle-image">🤘</div>
+                    <div class="hairstyle-name">Punk Rock Kitty</div>
+                    <div class="hairstyle-description">*hisses coolly* Rebellious and edgy</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Gentleman Cat')">
+                    <div class="hairstyle-image">🎩</div>
+                    <div class="hairstyle-name">Dapper Gentleman</div>
+                    <div class="hairstyle-description">*tips hat* Distinguished and proper</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Beach Waves')">
+                    <div class="hairstyle-image">🌊</div>
+                    <div class="hairstyle-name">Beach Wave Fur</div>
+                    <div class="hairstyle-description">*swishes tail* Relaxed summer vibes</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Space Buns')">
+                    <div class="hairstyle-image">🌟</div>
+                    <div class="hairstyle-name">Cosmic Space Buns</div>
+                    <div class="hairstyle-description">*meows at stars* Out of this world!</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Vintage Curls')">
+                    <div class="hairstyle-image">🌸</div>
+                    <div class="hairstyle-name">Vintage Curls</div>
+                    <div class="hairstyle-description">*purrs nostalgically* Classic elegance</div>
+                </div>
+
+                <div class="hairstyle-card" onclick="selectHairstyle('Messy Chic')">
+                    <div class="hairstyle-image">😹</div>
+                    <div class="hairstyle-name">Messy Chic</div>
+                    <div class="hairstyle-description">*stretches lazily* Effortlessly stylish</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectHairstyle(styleName) {
+            alert(`*purrs happily* You chose "${styleName}"! Looking absolutely paw-some! *preens*`);
+        }
+
+        function goBack() {
+            alert('*meows* Heading back to my FurFolio homepage... *swishes tail stylishly*');
+        }
+    </script>
+</body>
+</html>
